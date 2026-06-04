@@ -7,17 +7,20 @@ on:
   push:
     branches:
       - main
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: "./01 Starting Project"
+
     steps:
-      - name: Output event data
-        run: echo "${{ toJSON(github.event) }}"
-      - name: Get code
-        uses: actions/checkout@v3
-      - name: List files
-        run: |
-          pwd
-          ls -la
-          find . -name package.json
+      - uses: actions/checkout@v3
+
+      - run: npm install
+      - run: npm run test
+      - run: npm run build
+
+      - run: echo "Deploying..."
+
