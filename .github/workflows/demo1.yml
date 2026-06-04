@@ -16,8 +16,8 @@ jobs:
         run: echo "${{ toJSON(github.event) }}"
       - name: Get code
         uses: actions/checkout@v3
-     - name: List files
-       run: |
-         pwd
-         ls -la
-         find . -name package.json
+      - name: List files
+        run: |
+          pwd
+          ls -la
+          find . -name package.json
