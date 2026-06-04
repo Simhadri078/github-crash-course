@@ -1,9 +1,12 @@
-name: Events Demo 1
+name: CI
 on:
   pull_request:
     types:
       - opened
   workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   deploy:
@@ -13,4 +16,11 @@ jobs:
         run: echo "${{ toJSON(github.event) }}"
       - name: Get code
         uses: actions/checkout@v3
-     
+      - name: Install dependencies
+        run: npm install
+      - name: Test code
+        run: npm run test
+      - name: Build code
+        run: npm run build
+      - name: Deploy project
+        run: echo "Deploying..."
